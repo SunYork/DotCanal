@@ -13,4 +13,8 @@
     <ProjectReference Include="..\DotCanal.Common\DotCanal.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Packets\Client\" />
+  </ItemGroup>
+
 </Project>
