@@ -5,9 +5,14 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9FFE683F-0100-4AEF-9B8C-4AFF4730A9C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCanal.Common", "src\DotCanal.Common\DotCanal.Common.csproj", "{0881352C-4A86-4D79-A564-56B0068330A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotCanal.Common", "src\DotCanal.Common\DotCanal.Common.csproj", "{0881352C-4A86-4D79-A564-56B0068330A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCanal.Driver", "src\DotCanal.Driver\DotCanal.Driver.csproj", "{7104798F-97E1-47DB-A924-38BF0E9DA3BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotCanal.Driver", "src\DotCanal.Driver\DotCanal.Driver.csproj", "{7104798F-97E1-47DB-A924-38BF0E9DA3BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{C1D038D1-FC86-4294-BF1F-D97FD0255037}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -7,14 +7,11 @@
   <ItemGroup>
     <PackageReference Include="DotNetty.Common" Version="0.4.6" />
     <PackageReference Include="DotNetty.Transport" Version="0.4.6" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DotCanal.Common\DotCanal.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Packets\Client\" />
   </ItemGroup>
 
 </Project>
