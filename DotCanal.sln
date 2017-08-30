@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotCanal.Driver", "src\DotCanal.Driver\DotCanal.Driver.csproj", "{7104798F-97E1-47DB-A924-38BF0E9DA3BA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{C1D038D1-FC86-4294-BF1F-D97FD0255037}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
