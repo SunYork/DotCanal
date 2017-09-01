@@ -11,8 +11,8 @@
             Header = header;
         }
 
-        public abstract void FromBytes(byte[] data);
+        public abstract void FromBytes(MySqlPacket data);
 
-        public abstract byte[] ToBytes();
+        public abstract MySqlPacket ToBytes();
     }
 }

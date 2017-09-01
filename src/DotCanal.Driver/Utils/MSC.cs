@@ -2,7 +2,7 @@
 {
     public class MSC
     {
-        public const int MAX_PACKET_LENGTH = (1 << 24);
+        public const int MAX_PACKET_LENGTH = int.MaxValue;
         public const int HEADER_PACKET_LENGTH_FIELD_LENGTH = 3;
         public const int HEADER_PACKET_LENGTH_FIELD_OFFSET = 0;
         public const int HEADER_PACKET_LENGTH = 4;

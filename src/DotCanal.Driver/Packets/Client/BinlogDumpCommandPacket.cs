@@ -1,6 +1,4 @@
-﻿using DotCanal.Driver.Utils;
-using System;
-using System.IO;
+﻿using System.Text;
 
 namespace DotCanal.Driver.Packets.Client
 {
@@ -18,7 +16,7 @@ namespace DotCanal.Driver.Packets.Client
             Command = 0x12;
         }
 
-        public override void FromBytes(byte[] data) { }
+        public override void FromBytes(MySqlPacket data) { }
 
         /// <summary>
         /// 字节         名称
@@ -30,29 +28,20 @@ namespace DotCanal.Driver.Packets.Client
         ///  4            server id
         ///  n            binlog文件名
         /// </summary>
-        public override byte[] ToBytes()
+        public override MySqlPacket ToBytes()
         {
-            using (var ms = new MemoryStream())
+            var packet = new MySqlPacket(Encoding.UTF8);
+            packet.WriteByte(Command);
+            packet.WriteInteger(BinlogPosition, 4);
+            packet.WriteInteger(BINLOG_SEND_ANNOTATE_ROWS_EVENT, 2);
+            packet.WriteByte(0x00);
+            packet.WriteInteger(SlaveServerId, 4);
+            if (!string.IsNullOrEmpty(BinlogFileName))
             {
-                using (var bw = new BinaryWriter(ms))
-                {
-                    bw.Write(Command);
-                    bw.Flush();
-                    ByteHelper.WriteUnsignedIntLittleEndian(BinlogPosition, ms);
-                    Int16 binlog_flags = 0;
-                    binlog_flags |= BINLOG_SEND_ANNOTATE_ROWS_EVENT;
-                    bw.Write(binlog_flags);
-                    bw.Write(0x00);
-                    bw.Flush();
-                    ByteHelper.WriteUnsignedIntLittleEndian(SlaveServerId, ms);
-
-                    if(!string.IsNullOrEmpty(BinlogFileName))
-                    {
-                        bw.Write(BinlogFileName);
-                    }
-                }
-                return ms.ToArray();
+                packet.WriteStringNoNull(BinlogFileName);
             }
+
+            return packet;
         }
     }
 }

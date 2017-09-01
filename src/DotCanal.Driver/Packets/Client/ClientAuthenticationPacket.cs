@@ -15,7 +15,7 @@ namespace DotCanal.Driver.Packets.Client
         public int ServerCapabilities { get; set; }
         public byte[] ScrumbleBuff { get; set; }
 
-        public override void FromBytes(byte[] data)
+        public override void FromBytes(MySqlPacket data)
         {
 
         }
@@ -31,35 +31,40 @@ namespace DotCanal.Driver.Packets.Client
         /// n                scramble_buff (1 + x bytes)
         /// n                databasename（可选）
         /// </summary>
-        public override byte[] ToBytes()
+        public override MySqlPacket ToBytes()
         {
-            using (var ms = new MemoryStream())
+            var packet = new MySqlPacket(Encoding.UTF8);
+            //1.写入 client_flags
+            packet.WriteInteger((int)(ClientFlags.LONG_PASSWORD | ClientFlags.LONG_FLAG
+                | ClientFlags.PROTOCOL_41 | ClientFlags.INTERACTIVE | ClientFlags.TRANSACTIONS
+                | ClientFlags.SECURE_CONNECTION), 4);
+            //2.写入 max_packet_size
+            packet.WriteInteger(MSC.MAX_PACKET_LENGTH, 4);
+            //3.写入charset_number
+            packet.WriteByte(CharsetNumber);
+            //4.写入filter
+            var filter = new byte[23];
+            packet.Write(filter);
+            //5.写入user
+            packet.WriteString(UserName);
+            //6.写入 scramble_buff
+            if(string.IsNullOrEmpty(Password))
             {
-                /* 1.写入 client_flags
-                 * CLIENT_LONG_PASSWORD CLIENT_LONG_FLAG CLIENT_PROTOCOL_41
-                 * CLIENT_INTERACTIVE CLIENT_TRANSACTIONS CLIENT_SECURE_CONNECTION
-                 */
-                ByteHelper.WriteUnsignedIntLittleEndian(1 | 4 | 512 | 8192 | 32768, ms);
-
-                // 2. 写入 mac_packet_size 
-                ByteHelper.WriteUnsignedIntLittleEndian(MSC.MAX_PACKET_LENGTH, ms);
-                // 3. 写入 charset_number
-                ms.WriteByte(CharsetNumber);
-                // 4. 写入 过滤
-                var filter = new byte[23];
-                ms.Write(filter, 0, filter.Length);
-                // 5. 写入 user
-                ByteHelper.WriteNullTerminatedString(UserName, ms);
-                // 6. 写入 scramble_buff
-                if(string.IsNullOrEmpty(Password))
-                {
-                    ms.WriteByte(0x00);
-                }
-                else
-                {
-
-                }
+                packet.WriteByte(0x00);
             }
+            else
+            {
+                byte[] encryptedPassword = MySQLPasswordEncrypter.Scramble411(Password, ScrumbleBuff);
+                packet.WriteLength(encryptedPassword.Length);
+                packet.Write(encryptedPassword);
+            }
+            //7. 写入数据库名
+            if (!string.IsNullOrEmpty(DatabaseName))
+            {
+                packet.WriteString(DatabaseName);
+            }
+
+            return packet;
         }
     }
 }

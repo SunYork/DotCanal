@@ -6,13 +6,13 @@
     public interface IPacket
     {
         /// <summary>
-        /// 接收原始字节
+        /// 从字节包恢复
         /// </summary>
-        void FromBytes(byte[] data);
+        void FromBytes(MySqlPacket data);
 
         /// <summary>
-        /// 将对象转换为字节
+        /// 将对象转换为字节包
         /// </summary>
-        byte[] ToBytes();
+        MySqlPacket ToBytes();
     }
 }
