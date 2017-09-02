@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace DotCanal.Driver.Packets.Server
 {
@@ -22,7 +20,11 @@ namespace DotCanal.Driver.Packets.Server
 
         public override MySqlPacket ToBytes()
         {
-
+            var packet = new MySqlPacket(Encoding.UTF8);
+            packet.WriteByte(FieldCount);
+            packet.WriteInteger(WarningCount, 2);
+            packet.WriteInteger(StatusFlag, 2);
+            return packet;
         }
     }
 }
