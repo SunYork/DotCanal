@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DotCanal.Driver.Packets
 {
@@ -17,23 +18,22 @@ namespace DotCanal.Driver.Packets
 
         public byte PacketSequenceNumber { get; set; }
 
-        public void FromBytes(byte[] data)
+        public void FromBytes(MySqlPacket data)
         {
             if (data == null || data.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(data));
 
-            PacketBodyLength = (data[0] & 0xFF) | ((data[1] & 0xFF) << 8) | ((data[2] & 0xFF) << 16);
-            PacketSequenceNumber = data[3];
+            PacketBodyLength = data.Read3ByteInt();
+            PacketSequenceNumber = data.ReadByte();
         }
 
-        public byte[] ToBytes()
+        public MySqlPacket ToBytes()
         {
-            byte[] data = new byte[4];
-            data[0] = (byte)(PacketBodyLength & 0xFF);
-            data[1] = (byte)(PacketBodyLength >> 8);
-            data[2] = (byte)(PacketBodyLength >> 16);
-            data[3] = PacketSequenceNumber;
-            return data;
+            var packet = new MySqlPacket(Encoding.UTF8);
+            packet.WriteInteger(PacketBodyLength, 3);
+            packet.WriteByte(PacketSequenceNumber);
+
+            return packet;
         }
     }
 }
