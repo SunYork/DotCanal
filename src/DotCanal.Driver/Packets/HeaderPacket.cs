@@ -22,7 +22,7 @@ namespace DotCanal.Driver.Packets
         {
             if (data == null || data.Length != 4)
                 throw new ArgumentOutOfRangeException(nameof(data));
-
+            data.Position = 0;
             PacketBodyLength = data.Read3ByteInt();
             PacketSequenceNumber = data.ReadByte();
         }

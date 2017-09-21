@@ -5,7 +5,7 @@
         public byte FieldCount { get; set; }
         public int ErrorNumber { get; set; }
         public byte SqlStateMarker { get; set; }
-        public byte[] SqlState { get; set; }
+        public byte[] SqlState { get; set; } = new byte[5];
         public string Message { get; set; }
 
         /// <summary>
@@ -19,14 +19,16 @@
         /// </summary>
         public override void FromBytes(MySqlPacket data)
         {
+            data.Position = 0;
+
             //1. read field count
             FieldCount = data.ReadByte();
             //2. read error no
             ErrorNumber = data.ReadInteger(2);
             //3. read marker
-            SqlStateMarker = data.ReadByte();
+            //SqlStateMarker = data.ReadByte();
             //4. read sqlstate
-            data.Read(SqlState, 0, 5);
+            //data.Read(SqlState, 0, 5);
             //5. read message
             Message = data.ReadString();
         }

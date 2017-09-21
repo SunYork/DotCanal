@@ -7,12 +7,12 @@ namespace DotCanal.Driver.Packets.Server
         public byte ProtocolVersion { get; set; } = MSC.DEFAULT_PROTOCOL_VERSION;
         public string ServerVersion { get; set; }
         public long ThreadId { get; set; }
-        public byte[] Seed { get; set; }
+        public byte[] Seed { get; set; } = new byte[8];
         public byte Filler { get; set; }
         public int ServerCapabilities { get; set; }
         public byte ServerCharsetNumber { get; set; }
         public int ServerStatus { get; set; }
-        public byte[] RestOfScrambleBuff { get; set; }
+        public byte[] RestOfScrambleBuff { get; set; } = new byte[12];
 
         public HandshakeInitializationPacket() { }
 
@@ -35,6 +35,7 @@ namespace DotCanal.Driver.Packets.Server
         /// </summary>
         public override void FromBytes(MySqlPacket data)
         {
+            data.Position = 0;
             //1. read protocolversion
             ProtocolVersion = data.ReadByte();
             //2. read server_version
