@@ -13,7 +13,7 @@ namespace DotCanal.DriverTest
         [Fact]
         public async Task TestQuery()
         {
-            MysqlConnector connector = new MysqlConnector(new IPEndPoint(IPAddress.Parse("192.168.0.242"), 3306), "root", "5802486");
+            MysqlConnector connector = new MysqlConnector(new IPEndPoint(IPAddress.Parse("192.168.0.242"), 3306), "root", "");
             await connector.ConnectAsync();
         }
     }
