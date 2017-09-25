@@ -19,7 +19,7 @@ namespace DotCanal.Driver.Packets.Client
         {
             var packet = new MySqlPacket(Encoding.UTF8);
             packet.WriteByte(Command);
-            packet.WriteStringNoNull(QueryString);
+            packet.WriteString(QueryString);
 
             return packet;
         }

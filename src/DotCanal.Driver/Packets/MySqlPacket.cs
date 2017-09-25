@@ -11,12 +11,19 @@ namespace DotCanal.Driver.Packets
         private Encoding _encoding;
         private readonly MemoryStream _buffer = new MemoryStream(5);
 
+        private MySqlPacket()
+        {
+            Clear();
+        }
+
         public MySqlPacket(Encoding enc)
+            : this()
         {
             Encoding = enc;
         }
 
         public MySqlPacket(MemoryStream stream)
+            : this()
         {
             _buffer = stream;
         }
@@ -54,7 +61,7 @@ namespace DotCanal.Driver.Packets
                 ArraySegment<byte> bits;
                 _buffer.TryGetBuffer(out bits);
 
-                return bits.Array[0] == 0xfe && Length <= 1;
+                return bits.Array[0] == 0xfe && Length <= 5;
             }
         }
 
@@ -66,6 +73,11 @@ namespace DotCanal.Driver.Packets
                 _buffer.TryGetBuffer(out bits);
                 return bits.Array;
             }
+        }
+
+        public void Clear()
+        {
+            Position = 4;
         }
 
         #region Byte methods
@@ -306,7 +318,7 @@ namespace DotCanal.Driver.Packets
 
         public string ReadString(long length)
         {
-            if (length == 0)
+            if (length <= 0)
                 return String.Empty;
             if (_tempBuffer == null || length > _tempBuffer.Length)
                 _tempBuffer = new byte[length];

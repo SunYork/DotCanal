@@ -11,7 +11,7 @@ namespace DotCanal.Driver.Packets.Server
             do
             {
                 Columns.Add(data.ReadLenString());
-            } while (data.Position >= data.Length);
+            } while (data.Position < data.Length);
         }
 
         public override MySqlPacket ToBytes()

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace DotCanal.Driver.Packets.Client
+namespace DotCanal.Driver.MySqlClient
 {
     [Flags]
-    internal enum ClientFlags : ulong
+    public enum ClientFlags : ulong
     {
         LONG_PASSWORD = 1, // new more secure passwords
         FOUND_ROWS = 2, // found instead of affected rows

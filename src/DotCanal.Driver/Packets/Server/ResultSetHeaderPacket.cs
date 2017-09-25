@@ -7,7 +7,6 @@
 
         public override void FromBytes(MySqlPacket data)
         {
-            data.Position += 1;
             ColumnCount = data.ReadFieldLength();
             if (data.Length > 0)
             {

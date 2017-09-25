@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{C1D0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D0CBE6C8-41A5-4462-9339-21B9B58DB8BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCanal.DriverTest", "test\DotCanal.DriverTest\DotCanal.DriverTest.csproj", "{57C8CE05-F977-4A69-B763-46B96BA71A61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotCanal.DriverTest", "test\DotCanal.DriverTest\DotCanal.DriverTest.csproj", "{57C8CE05-F977-4A69-B763-46B96BA71A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotCanal.DbSync", "src\DotCanal.DbSync\DotCanal.DbSync.csproj", "{77765FF0-24B0-40E8-98F8-4505D67598AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{57C8CE05-F977-4A69-B763-46B96BA71A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57C8CE05-F977-4A69-B763-46B96BA71A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57C8CE05-F977-4A69-B763-46B96BA71A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77765FF0-24B0-40E8-98F8-4505D67598AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77765FF0-24B0-40E8-98F8-4505D67598AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77765FF0-24B0-40E8-98F8-4505D67598AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77765FF0-24B0-40E8-98F8-4505D67598AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{0881352C-4A86-4D79-A564-56B0068330A8} = {9FFE683F-0100-4AEF-9B8C-4AFF4730A9C0}
 		{7104798F-97E1-47DB-A924-38BF0E9DA3BA} = {9FFE683F-0100-4AEF-9B8C-4AFF4730A9C0}
 		{57C8CE05-F977-4A69-B763-46B96BA71A61} = {D0CBE6C8-41A5-4462-9339-21B9B58DB8BB}
+		{77765FF0-24B0-40E8-98F8-4505D67598AA} = {9FFE683F-0100-4AEF-9B8C-4AFF4730A9C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0444DD09-558E-44E6-98F3-30178D72FBDB}
